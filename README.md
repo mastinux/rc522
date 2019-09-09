@@ -63,3 +63,20 @@ https://pimylifeup.com/raspberry-pi-rfid-rc522/
 ## Read RFID
 
 - `sudo ./scripts/read-rfid.py`
+
+
+# Screen command on raspberry pi
+
+`# apt install screen`
+
+`$ screen` avvia nuova sessione
+
+`$ command` lancia command nella sessione
+
+`Ctrl + A` + `D` detach dalla sessione
+
+`$ screen -list` visualizza sessioni attive
+
+`$ screen -r` riconnette a sessione
+
+`Ctrl + D` termina sessione
