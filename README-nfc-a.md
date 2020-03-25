@@ -16,7 +16,7 @@
 - optional limit of unsuccessful attempts
 - field programmable read-only locking function per page for the first 64 B
 
-![memory organization](./01_memory_organization.png)
+![memory organization](./images/01_memory_organization.png)
 
 - serial number + internal: programmed e write protected
 - lock byte 0 e 1: bit per il lock su OTP e user memory
