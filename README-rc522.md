@@ -1,3 +1,16 @@
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
+
+- [RC522 - Raspberry Pi 3 B](#rc522---raspberry-pi-3-b)
+  - [Wiring](#wiring)
+  - [Setting up](#setting-up)
+  - [Python](#python)
+  - [Write RFID](#write-rfid)
+  - [Read RFID](#read-rfid)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 # RC522 - Raspberry Pi 3 B
 
 <!-- https://pimylifeup.com/raspberry-pi-rfid-rc522/ -->
@@ -59,9 +72,11 @@ oppure aggiungi `dtparam=spi=on` in coda al file
 
 - `# ./scripts/read-rfid.py`
 
---------------------------------------------------------------------------------
+---
 
-# screen
+#### Misc
+
+##### screen
 
 - `# apt install screen`
 
@@ -76,16 +91,4 @@ oppure aggiungi `dtparam=spi=on` in coda al file
 - riconnettere a una sessione `$ screen -r`
 
 - terminare sessione `Ctrl + D`
-
---------------------------------------------------------------------------------
-
-- MIFARE Classic EV1 MF1S50
-
-	1kb
-	16 sectors, 4 blocks per sectors
-	64 blocks, 16 bytes per blocks
-
-	Type A
-
-- IEC 14443-3
 

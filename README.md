@@ -1,4 +1,20 @@
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
+
+- [NFC/RFID](#nfcrfid)
+  - [Mifare](#mifare)
+    - [Mifare Classic](#mifare-classic)
+    - [Mifare Ultralight](#mifare-ultralight)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 # NFC/RFID
+
+Proximity Inductive Coupling Card (PICC): transponder basato sullo standard ISO1443.
+Non ha una batteria, ma si alimenta dal campo magnetico generato da un PCD.
+
+Proximity Coupling Device (PCD): trasmettitore che legge tag PICC.
 
 |RFID		|NFC		|Altri|
 |-|-|-|
@@ -7,17 +23,11 @@
 |EM4XX, HID Prox, Indala, Honeywell, AWID, ...|Mifare/DESFire, iClass, Legic, Calypso, pagamenti contactless, ...|Vehicle id, asset tracking, ...|
 
 Ogni card ha un Unique Identifier (UID) di 3-10 byte, molto spesso 4 byte, che è read-only.
-L'UID viene impostato dal costruttore.  
+L'UID viene impostato dal costruttore.
 T5577 (RFID) o MAGIC UID (NFC) permettono di alterare il proprio UID.
 RFID Duplicator o 125kHz-13.56MHz Duplicator fanno da clonatori.
 
-- `$ nfc-list`
-
-- `$ nfc-mfsetuid <X>`
-
-	X: UID da impostare, es. `3b3cf00e`
-
-Applicazioni per smart phone: NFC Tool, Mifare Classic Tool, NFC card emulator.
+Applicazioni per smart phone: NFC Tools, Mifare Classic Tool, NFC card emulator.
 
 (RFID) UID non protetto: EM41XX, HID Prox II, Indala  
 (NFC) UID non protetto: Mifare  
@@ -27,6 +37,8 @@ Applicazioni per smart phone: NFC Tool, Mifare Classic Tool, NFC card emulator.
 (NFC) contiene UID e DATI
 
 Applicazioni per smart phone: MIFARE++ Ultralight
+
+I valori di ATQA, SAK e ATS possono essere usati per identificare il costruttore, il tipo di tag e l'applicazione.
 
 ## Mifare
 
@@ -87,66 +99,4 @@ Chiavi
 	- android.nfc.tech.NdefFormatable
 
 UID di 7 byte
-
---------------------------------------------------------------------------------
-
-### NFCulT
-
-NFC - 64 byte - 14 pagine da 4 byte
-
-||Byte0|Byte1|Byte2|Byte3|
-||-|-|-|-|
-|Indirizzo pagina|||||
-|0|UID (SN0)|UID (SN1)|UID (SN2)|UID (CB0)|
-|1|UID (SN3)|UID (SN4)|UID (SN5)|UID (SN6)|
-|2|UID (CB1)|Internal|Lock Byte 0|Lock Byte 1|
-|3|OTP|OTP|OTP|OTP|
-|4-15|Data|Data|Data|Data|
-
-CB0 = 0x88 ⊕ SN0 ⊕ SN1 ⊕ SN2  
-CB1 = SN3 ⊕ SN4 ⊕ SN5 ⊕ SN6
-
-Lock Byte 0 = \| L-7 \| L-6 \| L-5 \| L-4 \| L-OTP \| BL-10 to 15 \| BL-4 to 9 \| BL - OTP \|  
-Lock Byte 1 = \| L-15 \| L-14 \| L-13 \| L-12 \| L-11 \| L-10 \| L-9 \| L-8 \|
-
-One-Time Programmable (OTP) = default 0x00
-
-##### Lock attack
-
-Procedimento:
-
-- settare il lock bit corretto
-
-Il settore corrispondente al bit settato diventa read-only
-
-Note: rendendo read-only un settore la validatrice non è in grado di scrivere su di esso e il numero di corse resta congelato.
-
-##### Time attack
-
-Precondizioni:
-
-- conoscere il formato del timestamp
-- conoscere la posizione del timestamp
-- timestamp non cifrato
-
-Processo:
-
-- individuare la pagina giusta
-- impostare la data del timestamp
-- impostare l'ora del timestamp
-
-##### Replay attack
-
-Precondizioni:
-
-- il biglietto non viene validato tramite un server
-- un biglietto valido
-- tag clone MIFARE Ultralight
-
-Processo:
-
-- copia il contenuto del biglietto
-- modifica le informazioni della chiave
-- scrivere sul tag clone
-
 
